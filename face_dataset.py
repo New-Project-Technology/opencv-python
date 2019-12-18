@@ -5,10 +5,17 @@ cam = cv2.VideoCapture(0)
 cam.set(3, 640) # set video width
 cam.set(4, 480) # set video height
 face_detector = cv2.CascadeClassifier('haarcascades/haarcascade_frontalface_default.xml')
+userCount = 0
+with open('user.txt', 'r+') as file:
+    while file.readline() != '':
+        userCount += 1
 
-# For each person, enter one numeric face id
-face_id = input('\n enter user id end press <return> ==>  ')
-print("\n [INFO] Initializing face capture. Look the camera and wait ...")
+
+    # For each person, enter one numeric face id
+    face_id_nickname = input('\n enter user id end press <return> ==>  ')
+    face_id = userCount
+    file.write(face_id_nickname + '\n')
+    print("\n [INFO] Initializing face capture. Look the camera and wait ...")
 
 # Initialize individual sampling face count
 count = 0
