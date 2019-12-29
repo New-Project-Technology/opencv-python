@@ -79,7 +79,7 @@ while True:
                 group_data.append(data)
                 with open('log.json', 'w+') as make_file:
                     json.dump(group_data, make_file, ensure_ascii=False, indent='\t')
-                if round(100 - confidence) >= 50:
+                if round(100 - confidence) >= 40:
                     s3.upload_file('log.json', bucket_name, 'log.json', ExtraArgs={'ACL':'public-read'})
             id = names[id]
             #confidence = "  {0}%".format(round(100 - confidence))
@@ -98,7 +98,7 @@ while True:
             #confidence = "  {0}%".format(round(100 - confidence))
             confidence = round(100 - confidence)
         
-        if str(id) != 'unknown' and int(confidence) >= 50:
+        if str(id) != 'unknown' and int(confidence) >= 40:
             cv2.putText(img, str(id), (x+5,y-5), font, 1, (255,255,255), 2)
             cv2.putText(img, str(confidence), (x+5,y+h-5), font, 1, (255,255,0), 1)  
         elif id == 'unknown':
